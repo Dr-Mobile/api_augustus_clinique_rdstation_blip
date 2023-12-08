@@ -57,23 +57,23 @@ class RdService {
 module.exports = new RdService();
 
 
-// Função para enviar dados para a API via POST
-async function enviarDadosParaAPI(dados) {
-}
+// // Função para enviar dados para a API via POST
+// async function enviarDadosParaAPI(dados) {
+// }
 
-// Exemplo de uso:
-const dadosParaEnviar = {
-  chave1: 'valor1',
-  chave2: 'valor2',
-  // ... adicione mais dados conforme necessário
-};
+// // Exemplo de uso:
+// const dadosParaEnviar = {
+//   chave1: 'valor1',
+//   chave2: 'valor2',
+//   // ... adicione mais dados conforme necessário
+// };
 
-enviarDadosParaAPI(dadosParaEnviar)
-  .then(resultado => {
-    // Faça algo com o resultado, se necessário
-    console.log('Operação bem-sucedida:', resultado);
-  })
-  .catch(erro => {
-    // Lide com erros, se necessário
-    console.error('Erro na operação:', erro);
-  });
+// enviarDadosParaAPI(dadosParaEnviar)
+//   .then(resultado => {
+//     // Faça algo com o resultado, se necessário
+//     console.log('Operação bem-sucedida:', resultado);
+//   })
+//   .catch(erro => {
+//     // Lide com erros, se necessário
+//     console.error('Erro na operação:', erro);
+//   });

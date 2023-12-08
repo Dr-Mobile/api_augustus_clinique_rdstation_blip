@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/server.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/Dr-Mobile/api_augustus_clinique_rdstation_blip/issues"
   },
-  "homepage": "https://github.com/Dr-Mobile/api_augustus_clinique_rdstation_blip#readme"
+  "homepage": "https://github.com/Dr-Mobile/api_augustus_clinique_rdstation_blip#readme",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2"
+  }
 }
