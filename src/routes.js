@@ -1,9 +1,9 @@
 const express = require("express");
 const routes = express.Router();
 
-const SantanderController = require("./controllers/SantanderController");
+const RdStationController = require("./app/controllers/RdStationController");
 
 
-routes.get("/api/transformData", StopBrowserController.stop);
+routes.get("/api/transformData", RdStationController.post);
 
 module.exports = routes;
