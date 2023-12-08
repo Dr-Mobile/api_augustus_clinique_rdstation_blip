@@ -3,8 +3,7 @@ const rdStationService = require("../services/rdStationService");
 class RdController {
   async post(req, res) {
 
-    console.log("Requisição " + req.body)
-    console.log("Requisição total" + req)
+    console.log("Requisição " + JSON.stringify(req.body))
 
     // if (await rdStationService.dataVerify(req.body)) {
     //   const { nome, telefone, email } = req.body;
