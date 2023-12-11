@@ -1,54 +1,85 @@
 const axios = require('axios');
+const fs = require("node:fs/promises");
+const path = require('path');
+const { v4: uuidv4 } = require('uuid');
+
 
 class RdService {
   async dataVerify(dados) {
     return new Promise(async (resolve, reject) => {
-      if (dados.name && dados.name !== "" &&
-        dados.telefone && dados.telefone !== "" &&
-        dados.email && dados.email !== "") {
-        return true;
+      try {
+        if (dados.leads && dados.leads.length > 0) {
+          resolve(true);
+        }
+        resolve(false);
+      } catch (e) {
+        resolve(false);
       }
-      return false;
     });
   }
 
   async sendDatasForBlip(nome, telefone, email) {
     return new Promise(async (resolve, reject) => {
       try {
+
+        let newGUID = await uuidv4();
+
         const dados = {
-          id: "{{$guid}}",
+          id: `${newGUID}`,
           to: "postmaster@crm.msging.net",
           method: "set",
           uri: "/contacts",
           type: "application/vnd.lime.contact+json",
           resource: {
-            identity: "{{contact_identity}}",
+            identity: `${telefone.replace(/[^\d]/g, '')}@wa.gw.msging.net`,
             name: nome,
-            phoneNumber: telefone,
+            phoneNumber: telefone.replace(/[^\d]/g, ''),
             email: email,
-            extras: { 
+            extras: {
               rdstation: true
             }
           }
         }
-        const url = 'URL_DA_API';
+
+        await this.logsService(JSON.stringify(dados))
+
+
+        const url = 'https://augustusclinique.http.msging.net/commands';
         const config = {
           headers: {
             'Content-Type': 'application/json',
-            // Adicione o cabeçalho de autorização se estiver usando autenticação por token
-            'Authorization': `token`,
+            'Authorization': `Key YXVndXN0dXNjbGluaXF1ZTpsM2FqNDZydTdPanlTMGtnSGhXYw==`,
           },
         };
         const resposta = await axios.post(url, dados, config);
 
-        console.log('Resposta da API:', resposta.data);
+        await this.logsService("\n" + JSON.stringify(resposta.data))
 
-        return resposta.data;
+        resolve();
       } catch (erro) {
-        console.error('Erro na requisição para a API:', erro.response.data);
+        console.error('Erro na requisição para a API:', erro.response);
         throw erro;
       }
+    })
+  }
 
+  async logsService(data) {
+    return new Promise(async (resolve, reject) => {
+      try {
+
+        const logFilePath = path.join(__dirname, '..', '..', "logs.txt");
+        let logs = (await fs.readFile(logFilePath)).toString();
+
+        logs += "\n" + data;
+
+        await fs.writeFile(logFilePath, logs);
+
+        resolve(logs.toString())
+
+      } catch (e) {
+        console.log(e);
+        resolve();
+      }
     })
   }
 
@@ -56,24 +87,3 @@ class RdService {
 
 module.exports = new RdService();
 
-
-// // Função para enviar dados para a API via POST
-// async function enviarDadosParaAPI(dados) {
-// }
-
-// // Exemplo de uso:
-// const dadosParaEnviar = {
-//   chave1: 'valor1',
-//   chave2: 'valor2',
-//   // ... adicione mais dados conforme necessário
-// };
-
-// enviarDadosParaAPI(dadosParaEnviar)
-//   .then(resultado => {
-//     // Faça algo com o resultado, se necessário
-//     console.log('Operação bem-sucedida:', resultado);
-//   })
-//   .catch(erro => {
-//     // Lide com erros, se necessário
-//     console.error('Erro na operação:', erro);
-//   });

@@ -1,0 +1,140 @@
+{
+    "leads": [
+        {
+            "id": "2992709297",
+            "email": "teste@teste.com",
+            "name": "Teste",
+            "company": null,
+            "job_title": null,
+            "bio": null,
+            "public_url": "http://app.rdstation.com.br/leads/public/3733ad71-2d35-4ab8-aaf1-19698cccdbf5",
+            "created_at": "2023-07-24T19:25:39.033-03:00",
+            "opportunity": "true",
+            "number_conversions": "4",
+            "user": "augustuscenter@gmail.com",
+            "first_conversion": {
+                "content": {
+                    "event_type": "CONVERSION",
+                    "event_identifier": "home",
+                    "identificador": "home",
+                    "event_timestamp": "2023-07-24T22:25:38Z",
+                    "email_lead": "teste@teste.com",
+                    "conversion_domain": "augustusmedicalcenter.com.br",
+                    "conversion_url": "https://augustusmedicalcenter.com.br/",
+                    "conversion_identifier": "home",
+                    "traffic_source": "encoded_eyJmaXJzdF9zZXNzaW9uIjp7InZhbHVlIjoiaHR0cHM6Ly9hdWd1c3R1c21lZGljYWxjZW50ZXIuY29tLmJyL3dwLWFkbWluLyIsImV4dHJhX3BhcmFtcyI6e319LCJjdXJyZW50X3Nlc3Npb24iOnsidmFsdWUiOiJodHRwczovL2FwcC5yZHN0YXRpb24uY29tLmJyLyIsImV4dHJhX3BhcmFtcyI6e319LCJjcmVhdGVkX2F0IjoxNjkwMjM3NTEyMzU2fQ==",
+                    "conversion_payload": "{\"idade\":\"33\",\"endereco\":\"Teste do teste de teste\",\"tel\":\"(31) 99270-5332\",\"msg\":\"teste\"}",
+                    "__cdp__original_event": {
+                        "event_batch_uuid": "50155cf0-c585-4767-be5e-d7dc6825a239",
+                        "event_batch_index": 0,
+                        "event_identifier": "home",
+                        "event_uuid": "841dddc2-9a16-40a6-bb43-1b42b0d04537",
+                        "event_family": "CDP",
+                        "event_type": "CONVERSION",
+                        "payload": {
+                            "email": "teste@teste.com",
+                            "conversion_domain": "augustusmedicalcenter.com.br",
+                            "conversion_url": "https://augustusmedicalcenter.com.br/",
+                            "conversion_identifier": "home",
+                            "traffic_source": "encoded_eyJmaXJzdF9zZXNzaW9uIjp7InZhbHVlIjoiaHR0cHM6Ly9hdWd1c3R1c21lZGljYWxjZW50ZXIuY29tLmJyL3dwLWFkbWluLyIsImV4dHJhX3BhcmFtcyI6e319LCJjdXJyZW50X3Nlc3Npb24iOnsidmFsdWUiOiJodHRwczovL2FwcC5yZHN0YXRpb24uY29tLmJyLyIsImV4dHJhX3BhcmFtcyI6e319LCJjcmVhdGVkX2F0IjoxNjkwMjM3NTEyMzU2fQ==",
+                            "internal_source": "10",
+                            "name": "Teste",
+                            "conversion_payload": "{\"idade\":\"33\",\"endereco\":\"Teste do teste de teste\",\"tel\":\"(31) 99270-5332\",\"msg\":\"teste\"}"
+                        },
+                        "event_timestamp": "2023-07-24T22:25:38Z"
+                    },
+                    "Nome": "Teste",
+                    "UF": null
+                },
+                "created_at": "2023-07-24T19:25:39.073-03:00",
+                "cumulative_sum": "1",
+                "source": "home",
+                "conversion_origin": {
+                    "source": "rdstation.com.br",
+                    "medium": "referral",
+                    "value": null,
+                    "campaign": "(referral)",
+                    "channel": "Referral"
+                }
+            },
+            "last_conversion": {
+                "content": {
+                    "event_type": "CONVERSION",
+                    "event_identifier": "whatsapp",
+                    "identificador": "whatsapp",
+                    "event_timestamp": "2023-10-11T03:44:25Z",
+                    "conversion_url": "https://augustusmedicalcenter.com.br/",
+                    "conversion_domain": "augustusmedicalcenter.com.br",
+                    "conversion_identifier": "whatsapp",
+                    "traffic_source": "encoded_eyJmaXJzdF9zZXNzaW9uIjp7InZhbHVlIjoiaHR0cHM6Ly9hdWd1c3R1c21lZGljYWxjZW50ZXIuY29tLmJyL3dwLWFkbWluLyIsImV4dHJhX3BhcmFtcyI6e319LCJjdXJyZW50X3Nlc3Npb24iOnsidmFsdWUiOiIobm9uZSkiLCJleHRyYV9wYXJhbXMiOnt9fSwiY3JlYXRlZF9hdCI6MTY5Njk5NTIwMzY1Nn0=",
+                    "email_lead": "teste@teste.com",
+                    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+                    "device": "desktop",
+                    "asset_id": 4867270,
+                    "conversion_payload": "{\"redirect_to\":\"https://web.whatsapp.com/send?phone=+5531999093030\\u0026text=Ol%C3%A1%2C+gostaria+de+mais+informa%C3%A7%C3%B5es.\"}",
+                    "__cdp__original_event": {
+                        "event_batch_uuid": "45bd96f0-71c2-4c16-9215-9cffd6b9c472",
+                        "event_batch_index": 0,
+                        "event_identifier": "whatsapp",
+                        "event_uuid": "775fb4da-e3af-482c-9b65-81e76936588f",
+                        "event_family": "CDP",
+                        "event_type": "CONVERSION",
+                        "payload": {
+                            "client_tracking_id": "",
+                            "conversion_url": "https://augustusmedicalcenter.com.br/",
+                            "conversion_domain": "augustusmedicalcenter.com.br",
+                            "conversion_identifier": "whatsapp",
+                            "internal_source": "12",
+                            "c_utmz": "",
+                            "traffic_source": "encoded_eyJmaXJzdF9zZXNzaW9uIjp7InZhbHVlIjoiaHR0cHM6Ly9hdWd1c3R1c21lZGljYWxjZW50ZXIuY29tLmJyL3dwLWFkbWluLyIsImV4dHJhX3BhcmFtcyI6e319LCJjdXJyZW50X3Nlc3Npb24iOnsidmFsdWUiOiIobm9uZSkiLCJleHRyYV9wYXJhbXMiOnt9fSwiY3JlYXRlZF9hdCI6MTY5Njk5NTIwMzY1Nn0=",
+                            "privacy_data": {
+                                "browser": ""
+                            },
+                            "name": "Teste",
+                            "email": "teste@teste.com",
+                            "personal_phone": "+55 (33) 33333-3332",
+                            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+                            "device": "desktop",
+                            "asset_id": 4867270,
+                            "conversion_payload": "{\"redirect_to\":\"https://web.whatsapp.com/send?phone=+5531999093030\\u0026text=Ol%C3%A1%2C+gostaria+de+mais+informa%C3%A7%C3%B5es.\"}"
+                        },
+                        "event_timestamp": "2023-10-11T03:44:25Z"
+                    },
+                    "Nome": "Teste",
+                    "Telefone": "+55 (33) 33333-3332",
+                    "UF": null
+                },
+                "created_at": "2023-10-11T00:44:25.883-03:00",
+                "cumulative_sum": "4",
+                "source": "whatsapp",
+                "conversion_origin": {
+                    "source": "(direct)",
+                    "medium": "(none)",
+                    "value": null,
+                    "campaign": "(direct)",
+                    "channel": "Direct"
+                }
+            },
+            "custom_fields": {
+                "Mensagem": "teste",
+                "Idade": "32",
+                "Endereço": "Teste do teste de teste",
+                "CONVERSÃO": "FormulÃ¡rio Site",
+                "AREA DE INTERESSE": "\\N"
+            },
+            "website": null,
+            "personal_phone": "+55 (33) 33333-3332",
+            "mobile_phone": "\\N",
+            "city": null,
+            "state": null,
+            "tags": [
+                "importacao-2023-08-09-16:15:54"
+            ],
+            "lead_stage": "Lead",
+            "last_marked_opportunity_date": "2023-08-09T04:02:46.261-03:00",
+            "uuid": "3733ad71-2d35-4ab8-aaf1-19698cccdbf5",
+            "fit_score": "d",
+            "interest": 0
+        }
+    ]
+}
