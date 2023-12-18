@@ -9,6 +9,10 @@ class RdController {
         await leads.map(async lead => {
           const { name, personal_phone, email } = lead;
           await rdStationService.sendDatasForBlip(name, personal_phone, email);
+          await rdStationService.checkIdWhatsapp(personal_phone);
+
+
+
         })        
       }
       res.send();

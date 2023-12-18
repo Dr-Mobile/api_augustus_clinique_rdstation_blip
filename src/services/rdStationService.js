@@ -2,6 +2,7 @@ const axios = require('axios');
 const fs = require("node:fs/promises");
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
+const { sendRequest } = require('../../help');
 
 
 class RdService {
@@ -45,13 +46,89 @@ class RdService {
 
 
         const url = 'https://augustusclinique.http.msging.net/commands';
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Key YXVndXN0dXNjbGluaXF1ZTpsM2FqNDZydTdPanlTMGtnSGhXYw==`,
-          },
-        };
-        const resposta = await axios.post(url, dados, config);
+        const keyAuth = "Key YXVndXN0dXNjbGluaXF1ZTpsM2FqNDZydTdPanlTMGtnSGhXYw=="
+
+        let resp = await sendRequest(url, keyAuth, dados);
+
+        await this.logsService("\n" + JSON.stringify(resp.data))
+
+        resolve();
+      } catch (erro) {
+        console.error('Erro na requisição para a API:', erro.response);
+        throw erro;
+      }
+    })
+  }
+
+  async checkIdWhatsapp(telefone) {
+    return new Promise(async (resolve, reject) => {
+
+      const dados = {
+        id: "${uuid}",
+        to: "postmaster@wa.gw.msging.net",
+        method: "get",
+        uri: "lime://wa.gw.msging.net/accounts/+${telefone.replace(/[^\d]/g, '')}"
+      }
+
+      let keyAuth = "Key YXVndXN0dXNjbGluaXF1ZTpsM2FqNDZydTdPanlTMGtnSGhXYw==";
+      let url = "https://augustusclinique.http.msging.net/commands";
+
+      let resp = await sendRequest(url, keyAuth, dados);
+
+      await this.logsService("\n" + JSON.stringify(resp.data))
+
+      resolve();
+
+
+    })
+  }
+
+  async sendMessage(nome, telefone, email) {
+    return new Promise(async (resolve, reject) => {
+      try {
+
+        let newGUID = await uuidv4();
+
+        const dados = {
+          id: `${newGUID}`,
+          to: `${telefone}@wa.gw.msging.net`,
+          type: "application/json",
+          content: {
+            type: "template",
+            template: {
+              namespace: "8c1521d7_0996_47db_b74b_561c5132fa9f",
+              name: "paciente_faltoso_motivos",
+              language: {
+                code: "pt_BR",
+                policy: "deterministic"
+              },
+              components: [
+                {
+                  type: "body",
+                  parameters: [
+                    {
+                      type: "text",
+                      text: `${nome}`
+                    },
+                    {
+                      type: "text",
+                      text: "teste"
+                    },
+                    {
+                      type: "text",
+                      text: "teste, teste"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+
+        await this.logsService(JSON.stringify(dados))
+
+
+
 
         await this.logsService("\n" + JSON.stringify(resposta.data))
 
