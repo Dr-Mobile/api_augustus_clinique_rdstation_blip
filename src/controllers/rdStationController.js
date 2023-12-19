@@ -1,4 +1,6 @@
+const { v4: uuidv4 } = require('uuid');
 const rdStationService = require("../services/rdStationService");
+
 
 class RdController {
   async post(req, res) {
@@ -8,7 +10,6 @@ class RdController {
 
         await leads.map(async lead => {
           const { name, personal_phone, email } = lead;
-          // await rdStationService.sendDatasForBlip(name, personal_phone, email);
 
           let uuid = await uuidv4();
 
@@ -19,7 +20,8 @@ class RdController {
             uri: `lime://wa.gw.msging.net/accounts/+${personal_phone.replace(/[^\d]/g, '')}`
           }
 
-          let idWhatsApp = await rdStationService.requestBlip(dados);
+          let idWhatsApp = await rdStationService.requestBlip(dados, "commands");
+
           const { data: idData } = idWhatsApp;
           const { status: idStatus, resource } = idData;
 
@@ -27,20 +29,24 @@ class RdController {
 
             const { alternativeAccount: identity } = resource;
 
-            const jsonUpdateContact = JSON.parse(`{
-                            "id":"${uuid}",
-                            "method":"merge",
-                            "uri":"/contacts",
-                            "type":"application/vnd.lime.contact+json",
-                            "resource":{"identity":"${identity}",
-                            "name":"${name}",
-                            "phoneNumber": "${personal_phone.replace(/[^\d]/g, '')}",
-                            "extras":{
-                              "rdstation": "true"
-                            },
-                            "source": "WhatsApp"}}`);
+            const jsonUpdateContact = {
+              id: `${uuid}`,
+              method: "merge",
+              uri: "/contacts",
+              type: "application/vnd.lime.contact+json",
+              resource: {
+                identity: `${identity}`,
+                name: `${name}`,
+                email: `${email}`,
+                phoneNumber: `${personal_phone.replace(/[^\d]/g, '')}`,
+                extras: {
+                  rdstation: "true"
+                },
+                source: "WhatsApp"
+              }
+            };
 
-            let update = await rdStationService.requestBlip(jsonUpdateContact);
+            let update = await rdStationService.requestBlip(jsonUpdateContact, "commands");
 
             const { data: contactData } = update;
             const { status: contactStatus } = contactData;
@@ -48,183 +54,142 @@ class RdController {
             if (contactStatus === 'success') {
 
               const idBot = 'principalaugustusclinique';
-              const jsonChangeBot = JSON.parse(`{
-                                "id": "${uuid}",
-                                "to": "postmaster@msging.net",
-                                "method": "set",
-                                "uri": "/contexts/${identity}/master-state",
-                                "type": "text/plain",
-                                "resource": "${idBot}@msging.net"}`);
+              const jsonChangeBot = {
+                id: `${uuid}`,
+                to: "postmaster@msging.net",
+                method: "set",
+                uri: `/contexts/${identity}/master-state`,
+                type: "text/plain",
+                resource: `${idBot}@msging.net`
+              };
 
-              let chooseBot = await rdStationService.requestBlip(jsonChangeBot);
+              let chooseBot = await rdStationService.requestBlip(jsonChangeBot, "commands");
+              console.log(chooseBot)
 
               const { data: chooseBotData } = chooseBot;
               const { status: chooseBotStatus } = chooseBotData;
 
               if (chooseBotStatus === 'success') {
 
-                const stateId = 'welcome';
+                const stateId = '55593bb2-afde-45b5-9343-70c4947babf4';
                 const flowIdentifier = 'f0196988-2f4e-42ab-9733-4fdce21d37f1';
-                const jsonChangeUserState = JSON.parse(`{
-                                  "id": "${uuid}",
-                                  "to":"postmaster@msging.net",
-                                  "method": "set",
-                                  "uri": "/contexts/${identity}/stateid@${flowIdentifier}",
-                                  "type": "text/plain",
-                                  "resource": "${stateId}"}`);
 
-                let changeUserState = await rdStationService.requestBlip(jsonChangeBot);
+                const jsonChangeUserState = {
+                  id: `${uuid}`,
+                  to: "postmaster@msging.net",
+                  method: "set",
+                  uri: `/contexts/${identity}/stateid@${flowIdentifier}`,
+                  type: "text/plain",
+                  resource: `${stateId}`
+                };
+
+
+                
+                let changeUserState = await rdStationService.requestBlip(jsonChangeUserState, "commands");
 
                 const { data: changeData } = changeUserState;
                 const { status: changeStatus } = changeData;
 
                 if (changeStatus === 'success') {
 
-                  const namespace = "";
-                  const modeloMensagem = "";
-                  const jsonEnviaMensagemConsulta = JSON.parse(`{
-                                        "id":"${uuid}",
-                                        "to":"${identity}",
-                                        "type":"application/json",
-                                        "content":{
-                                          "type":"template",
-                                          "template":{
-                                            "namespace":"${namespace}",
-                                            "name":"${modeloMensagem}",
-                                            "language":{
-                                              "code":"pt_BR",
-                                              "policy":"deterministic"
-                                            },
-                                            "components":[
-                                              {
-                                                "type": "body",
-                                                "parameters":[
-                                                  {
-                                                    "type": "text",
-                                                    "text": "${msg.data
-                      .split('-')
-                      .reverse()
-                      .join('/')}"
-                                                  },
-                                                  {
-                                                    "type": "text",
-                                                    "text": "${msg.hora.split(':')[0]
-                    }:${msg.hora.split(':')[1]}"
-                                                  },
-                                                  {
-                                                    "type": "text",
-                                                    "text": "${msg.unidade}"
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        }
-                                      }`);
+                  const namespace = "bc249673_201a_481c_b91f_889006afbc48";
+                  const modeloMensagem = "mensagem_forms_rd_copia";
+                  const jsonEnviaMensagemConsulta = {
+                    id: `${uuid}`,
+                    to: `${identity}`,
+                    type: "application/json",
+                    content: {
+                      type: "template",
+                      template: {
+                        namespace: `${namespace}`,
+                        name: `${modeloMensagem}`,
+                        language: {
+                          code: "pt_BR",
+                          policy: "deterministic"
+                        },
+                        components: [
+                          {
+                            type: "body",
+                            parameters: [
+                              {
+                                type: "text",
+                                text: `${name}`
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  };
 
-                  const enviaWhatsapp = await messages(
-                    jsonEnviaMensagemConsulta,
-                    tokenblip
-                  );
+                  let enviaWhatsapp = await rdStationService.requestBlip(jsonEnviaMensagemConsulta, "messages");
 
                   const { status: statusEnvio } = enviaWhatsapp;
 
-                  if (statusEnvio === 202) {
-                    logger(`Mensagem enviada com sucesso para ${identity}`);
+                  console.log("STATUS DO ENVIO " + statusEnvio);
 
-                    await new Promise(resolve =>
-                      setTimeout(
-                        resolve,
-                        randomIntFromInterval(rndInt.min, rndInt.max)
-                      )
-                    );
+                  // if (statusEnvio === 202) {
 
-                    const trackingDetailedBody = `{
-                                      "id": "${uuid}",
-                                      "to": "postmaster@analytics.msging.net",
-                                      "method": "set",
-                                      "type": "application/vnd.iris.eventTrack+json",
-                                      "uri": "/event-track",
-                                      "resource": {
-                                        "category": "Confirmacao Detalhada",
-                                        "action": "Sucesso - Contato: ${celular}"
-                                      }
-                                    }`;
-                    await commands(trackingDetailedBody, tokenblip);
+                  //   const trackingDetailedBody = {
+                  //     id: `${uuid}`,
+                  //     to: "postmaster@analytics.msging.net",
+                  //     method: "set",
+                  //     type: "application/vnd.iris.eventTrack+json",
+                  //     uri: "/event-track",
+                  //     resource: {
+                  //       category: "Confirmacao Detalhada",
+                  //       action: `Sucesso - Contato: ${personal_phone.replace(/[^\d]/g, '')}`
+                  //     }
+                  //   };
 
-                    const trackingBody = `{
-                                      "id": "${uuid}",
-                                      "to": "postmaster@analytics.msging.net",
-                                      "method": "set",
-                                      "type": "application/vnd.iris.eventTrack+json",
-                                      "uri": "/event-track",
-                                      "resource": {
-                                        "category": "Confirmacao",
-                                        "action": "Sucesso"
-                                      }
-                                    }`;
-                    await commands(trackingBody, tokenblip);
+                  //   await rdStationService.requestBlip(trackingDetailedBody);
 
-                    await new GerenciaMensagem({
-                      id_hospital: msg.horarioId,
-                      celular,
-                      cnpj,
-                      nome_modelo: modelo_mensagem,
-                      variaveis: `${uuid},
-                                              ${identity},
-                                              ${namespace},
-                                              ${idbot},
-                                              ${msg.paciente}`,
-                      enviado: 'SIM',
-                      uuid,
-                    }).save();
-                  }
+                  //   const trackingBody = {
+                  //     id: `${uuid}`,
+                  //     to: "postmaster@analytics.msging.net",
+                  //     method: "set",
+                  //     type: "application/vnd.iris.eventTrack+json",
+                  //     uri: "/event-track",
+                  //     resource: {
+                  //       category: "Confirmacao",
+                  //       action: "Sucesso"
+                  //     }
+                  //   };
+
+                  //   await rdStationService.requestBlip(trackingBody);
+                  // }
                 }
               }
             }
           } else {
-            await new Promise(resolve =>
-              setTimeout(resolve, randomIntFromInterval(rndInt.min, rndInt.max))
-            );
+            console.log("Deu zica");
 
-            const trackingDetailedBody = `{
-                "id": "${uuid}",
-                "to": "postmaster@analytics.msging.net",
-                "method": "set",
-                "type": "application/vnd.iris.eventTrack+json",
-                "uri": "/event-track",
-                "resource": {
-                  "category": "Confirmacao Detalhada",
-                  "action": "Falha - Motivo: Sem WhatsApp, Contato: ${celular}"
-                }
-              }`;
-            await commands(trackingDetailedBody, tokenblip);
+            // const trackingDetailedBody = {
+            //   id: `${uuid}`,
+            //   to: "postmaster@analytics.msging.net",
+            //   method: "set",
+            //   type: "application/vnd.iris.eventTrack+json",
+            //   uri: "/event-track",
+            //   resource: {
+            //     category: "Confirmacao Detalhada",
+            //     action: `Falha - Motivo: Sem WhatsApp, Contato: ${personal_phone.replace(/[^\d]/g, '')}`
+            //   }
+            // };
+            // await rdStationService.requestBlip(trackingDetailedBody);
 
-            const trackingBody = `{
-                "id": "${uuid}",
-                "to": "postmaster@analytics.msging.net",
-                "method": "set",
-                "type": "application/vnd.iris.eventTrack+json",
-                "uri": "/event-track",
-                "resource": {
-                  "category": "Confirmacao",
-                  "action": "Falha"
-                }
-              }`;
-            await commands(trackingBody, tokenblip);
-
-            await new GerenciaMensagem({
-              id_hospital: msg.horarioId,
-              celular,
-              cnpj,
-              nome_modelo: modelo_mensagem,
-              enviado: 'NAO',
-              ds_erro: 'SEM WHATSAPP',
-              uuid,
-            }).save();
+            // const trackingBody = {
+            //   id: `${uuid}`,
+            //   to: "postmaster@analytics.msging.net",
+            //   method: "set",
+            //   type: "application/vnd.iris.eventTrack+json",
+            //   uri: "/event-track",
+            //   resource: {
+            //     category: "Confirmacao",
+            //     action: "Falha"
+            //   }
+            // };
+            // await rdStationService.requestBlip(trackingBody);
           }
-
-
         })
       }
       res.send();

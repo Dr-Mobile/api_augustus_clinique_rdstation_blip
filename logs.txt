@@ -1,2 +1,190 @@
 
 {"id":"724368e9-44f2-40a7-9e61-7530ea683920","to":"postmaster@crm.msging.net","method":"set","uri":"/contacts","type":"application/vnd.lime.contact+json","resource":{"identity":"5533333333332@wa.gw.msging.net","name":"Teste","phoneNumber":"5533333333332","email":"teste@teste.com","extras":{"rdstation":true}}}
+
+[object Object]
+
+[object Object]
+
+undefined
+
+[object Object]
+
+[object Object]
+
+undefined
+
+undefined
+
+undefined
+
+[object Object]
+
+[object Object]
+
+undefined
+
+[object Object]
+
+[object Object]
+
+undefined
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
+
+[object Object]
