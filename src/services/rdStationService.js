@@ -1,4 +1,3 @@
-const axios = require('axios');
 const fs = require("node:fs/promises");
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
@@ -60,28 +59,22 @@ class RdService {
     })
   }
 
-  async checkIdWhatsapp(telefone) {
+  async requestBlip(dados) {
     return new Promise(async (resolve, reject) => {
-
-      const dados = {
-        id: "${uuid}",
-        to: "postmaster@wa.gw.msging.net",
-        method: "get",
-        uri: "lime://wa.gw.msging.net/accounts/+${telefone.replace(/[^\d]/g, '')}"
-      }
 
       let keyAuth = "Key YXVndXN0dXNjbGluaXF1ZTpsM2FqNDZydTdPanlTMGtnSGhXYw==";
       let url = "https://augustusclinique.http.msging.net/commands";
 
       let resp = await sendRequest(url, keyAuth, dados);
 
-      await this.logsService("\n" + JSON.stringify(resp.data))
+      await this.logsService("\n" + JSON.stringify(resp))
 
-      resolve();
-
+      resolve(resp);
 
     })
   }
+
+  
 
   async sendMessage(nome, telefone, email) {
     return new Promise(async (resolve, reject) => {

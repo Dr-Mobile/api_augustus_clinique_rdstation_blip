@@ -1,3 +1,4 @@
+const axios = require('axios');
 
 module.exports.sendRequest = async function sendRequest(url, auth, dados) {
     return new Promise(async (resolve, reject) =>{
