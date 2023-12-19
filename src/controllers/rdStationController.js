@@ -127,7 +127,7 @@ class RdController {
 
                     const { status: statusEnvio } = enviaWhatsapp;
 
-                    console.log("STATUS DO ENVIO " + statusEnvio);
+                    // console.log("STATUS DO ENVIO " + statusEnvio);
 
                     if (statusEnvio === 202) {
 
@@ -163,7 +163,6 @@ class RdController {
                 }
               }
             } else {
-              console.log("Deu zica");
 
               const trackingDetailedBody = {
                 id: `${uuid}`,
